@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Floor from "../components/Floor";
 import Elevator from "./Elevator";
 
+const FLOORS = [0, 1, 2, 3, 4, 5, 6];
+
 const ControlSystem = () => {
   // Initial state for elevator A
   const [elevatorA, setElevatorA] = useState({
@@ -40,16 +42,20 @@ const ControlSystem = () => {
 
   //  Trigger the 'Select Floor' button
   const selectDestination = (elevatorId, floor) => {
-    if (elevatorId === "A") {
-      setElevatorA((prev) => ({
-        ...prev,
-        destinationFloors: [...prev.destinationFloors, floor],
-      }));
+    if (floor >= 0 && floor < FLOORS.length) {
+      if (elevatorId === "A") {
+        setElevatorA((prev) => ({
+          ...prev,
+          destinationFloors: [...prev.destinationFloors, floor],
+        }));
+      } else {
+        setElevatorB((prev) => ({
+          ...prev,
+          destinationFloors: [...prev.destinationFloors, floor],
+        }));
+      }
     } else {
-      setElevatorB((prev) => ({
-        ...prev,
-        destinationFloors: [...prev.destinationFloors, floor],
-      }));
+      alert(`Invalid floor number. Please select a floor between 0 and ${FLOORS.length}`);
     }
   };
 
@@ -110,8 +116,8 @@ const ControlSystem = () => {
   }, [elevatorB]);
 
   return (
-    <div>
-      <div>
+    <div className="flex">
+      <div className="flex justify-evenly max-h-[600px]">
         <Elevator
           id={elevatorA.id}
           currentFloor={elevatorA.currentFloor}
@@ -128,7 +134,7 @@ const ControlSystem = () => {
         />
       </div>
       <div>
-        {[0, 1, 2, 3, 4, 5, 6].map((floor) => (
+        {FLOORS.map((floor) => (
           <Floor key={floor} id={floor} callElevator={callElevator} />
         ))}
       </div>
