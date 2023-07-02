@@ -1,5 +1,11 @@
+import ControlSystem from "./components/ControlSystem";
+
 function App() {
-  return <div></div>;
+  return (
+    <div>
+      <ControlSystem />
+    </div>
+  );
 }
 
 export default App;
