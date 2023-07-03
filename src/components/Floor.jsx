@@ -9,15 +9,15 @@ const Floor = ({ id, callElevator }) => {
   };
 
   return (
-    <div>
-      <h3>Floor {id}</h3>
+    <div className="flex gap-5 mb-4">
+      <h3 className="font-bold text-xl p-4">Floor {id}</h3>
       <div>
-        <button onClick={() => handleCallElevator(id, "up")} disabled={direction === "up"}>
+        <button onClick={() => handleCallElevator(id, "up")} disabled={direction === "up"} className="up-down-btn">
           Up
         </button>
       </div>
       <div>
-        <button onClick={() => handleCallElevator(id, "down")} disabled={direction === "down"}>
+        <button onClick={() => handleCallElevator(id, "down")} disabled={direction === "down"} className="up-down-btn">
           Down
         </button>
       </div>

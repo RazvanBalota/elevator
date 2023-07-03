@@ -21,7 +21,7 @@ const ControlSystem = () => {
     direction: "down",
   });
 
-  //Implement Up and Down buttons and update their states
+  //Update the states of Up and Down buttons
   const callElevator = (floor, direction) => {
     const closestElevator = getClosestElevator(floor);
 
@@ -55,7 +55,7 @@ const ControlSystem = () => {
         }));
       }
     } else {
-      alert(`Invalid floor number. Please select a floor between 0 and ${FLOORS.length}`);
+      alert(`Invalid floor number. Please select a floor between 0 and ${FLOORS.length - 1}`);
     }
   };
 
@@ -64,7 +64,11 @@ const ControlSystem = () => {
     const distanceB = Math.abs(elevatorB.currentFloor - floor);
 
     if (distanceA === distanceB) {
-      return elevatorA.direction === "up" ? "A" : "B";
+      if (elevatorA.currentFloor < elevatorB.currentFloor) {
+        return "A";
+      } else {
+        return "B";
+      }
     }
 
     return distanceA < distanceB ? "A" : "B";
@@ -116,7 +120,7 @@ const ControlSystem = () => {
   }, [elevatorB]);
 
   return (
-    <div className="flex">
+    <div>
       <div className="flex justify-evenly max-h-[600px]">
         <Elevator
           id={elevatorA.id}
@@ -125,6 +129,11 @@ const ControlSystem = () => {
           direction={elevatorA.direction}
           selectDestination={selectDestination}
         />
+        <div>
+          {FLOORS.map((floor) => (
+            <Floor key={floor} id={floor} callElevator={callElevator} />
+          ))}
+        </div>
         <Elevator
           id={elevatorB.id}
           currentFloor={elevatorB.currentFloor}
@@ -132,11 +141,6 @@ const ControlSystem = () => {
           direction={elevatorB.direction}
           selectDestination={selectDestination}
         />
-      </div>
-      <div>
-        {FLOORS.map((floor) => (
-          <Floor key={floor} id={floor} callElevator={callElevator} />
-        ))}
       </div>
     </div>
   );

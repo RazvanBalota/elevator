@@ -11,14 +11,27 @@ const Elevator = ({ id, currentFloor, destinationFloors, direction, selectDestin
   };
 
   return (
-    <div>
-      <h3>Elevator {id}</h3>
-      <p>Current Floor: {currentFloor}</p>
-      <p>Destination Floors: {destinationFloors.length > 0 ? destinationFloors.join(", ") : "None"}</p>
-      <p>Direction: {direction}</p>
-      <div>
-        <input type="number" value={selectedFloor} onChange={(e) => setSelectedFloor(e.target.value)} />
-        <button onClick={handleSelectedDestination}>Select Floor</button>
+    <div className="border-2 bg-[#121212] text-xl text-[#f1f1f1] rounded p-5">
+      <h3 className="text-center">Elevator {id}</h3>
+      <p className="text-center mb-4">Current Floor: {currentFloor}</p>
+      <p className="mb-4">
+        Destination Floor:{" "}
+        <span className="text-red-500">{destinationFloors.length > 0 ? destinationFloors.join(", ") : "None"}</span>
+      </p>
+      <p className="mb-4">
+        Direction: <span className="text-red-500">{direction}</span>
+      </p>
+      <div className="flex gap-x-4">
+        <input
+          type="number"
+          value={selectedFloor}
+          onChange={(e) => setSelectedFloor(e.target.value)}
+          placeholder="Enter floor"
+          className="outline-none bg-transparent border-2 p-2 rounded-sm"
+        />
+        <button onClick={handleSelectedDestination} className="select-floor-btn">
+          Select Floor
+        </button>
       </div>
     </div>
   );
