@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/elevator/static/css/main.10d07120.css",
+    "main.js": "/elevator/static/js/main.9994646a.js",
+    "index.html": "/elevator/index.html",
+    "main.10d07120.css.map": "/elevator/static/css/main.10d07120.css.map",
+    "main.9994646a.js.map": "/elevator/static/js/main.9994646a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.10d07120.css",
+    "static/js/main.9994646a.js"
+  ]
+}
